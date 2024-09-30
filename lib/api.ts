@@ -54,6 +54,118 @@ export async function getPortfolioPieces(): Promise<any[]> {
           description {
             json
           }
+                    image1 {
+          url
+          title
+        }
+        description2 {
+          json
+        }
+        image2 {
+          url
+          title
+        }
+        description3 {
+          json
+        }
+        image3 {
+          url
+          title
+        }
+        description4 {
+          json
+        }
+        image4 {
+          url
+          title
+        }
+        description5 {
+          json
+        }
+        image5 {
+          url
+          title
+        }
+        description6 {
+          json
+        }
+        image6 {
+          url
+          title
+        }
+        description7 {
+          json
+        }
+        image7 {
+          url
+          title
+        }
+        description8 {
+          json
+        }
+        image8 {
+          url
+          title
+        }
+        description9 {
+          json
+        }
+        image9 {
+          url
+          title
+        }
+        description10 {
+          json
+        }
+        image10 {
+          url
+          title
+        }
+        description11 {
+          json
+        }
+        image11 {
+          url
+          title
+        }
+        description12 {
+          json
+        }
+        image12 {
+          url
+          title
+        }
+        description13 {
+          json
+        }
+        image13 {
+          url
+          title
+        }
+        description14 {
+          json
+        }
+        image14 {
+          url
+          title
+        }
+        description15 {
+          json
+        }
+        image15 {
+          url
+          title
+        }
+        description16 {
+          json
+        }
+        image16 {
+          url
+          title
+        }
+        description17 {
+          json
+        }
           imagesManyCollection {
             items {
               url
@@ -84,6 +196,118 @@ export async function getPortfolioPieceBySlug(slug: string): Promise<any> {
           description {
             json
           }
+                    image1 {
+          url
+          title
+        }
+        description2 {
+          json
+        }
+        image2 {
+          url
+          title
+        }
+        description3 {
+          json
+        }
+        image3 {
+          url
+          title
+        }
+        description4 {
+          json
+        }
+        image4 {
+          url
+          title
+        }
+        description5 {
+          json
+        }
+        image5 {
+          url
+          title
+        }
+        description6 {
+          json
+        }
+        image6 {
+          url
+          title
+        }
+        description7 {
+          json
+        }
+        image7 {
+          url
+          title
+        }
+        description8 {
+          json
+        }
+        image8 {
+          url
+          title
+        }
+        description9 {
+          json
+        }
+        image9 {
+          url
+          title
+        }
+        description10 {
+          json
+        }
+        image10 {
+          url
+          title
+        }
+        description11 {
+          json
+        }
+        image11 {
+          url
+          title
+        }
+        description12 {
+          json
+        }
+        image12 {
+          url
+          title
+        }
+        description13 {
+          json
+        }
+        image13 {
+          url
+          title
+        }
+        description14 {
+          json
+        }
+        image14 {
+          url
+          title
+        }
+        description15 {
+          json
+        }
+        image15 {
+          url
+          title
+        }
+        description16 {
+          json
+        }
+        image16 {
+          url
+          title
+        }
+        description17 {
+          json
+        }
           imagesManyCollection {
             items {
               url

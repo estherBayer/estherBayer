@@ -57,7 +57,7 @@ function HeroSection() {
             <div className="my-2"></div>
 
             <h2 className="text-3xl md:text-5xl tracking-tighter font-semibold">
-              <HighlightedText text="With over a decade of exploration and impactful work, I leverage creativity, problem-solving curiosity, and technical expertise to elevate brands, enchant users, and deliver tangible results." />
+              <HighlightedText text="With over a decade of exploration and impactful work, I leverage creativity, problem- solving curiosity, and technical expertise to elevate brands, enchant users, and deliver tangible results." />
             </h2>
           </div>
         </div>

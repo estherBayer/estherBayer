@@ -2,12 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import NavBar from './nav-bar'; // Import the navbar component 
-import HeroSection from './hero-section'; // Import the hero-section component 
-import WorkSamplesIndex from './work-samples-index';
-
-
-
+import NavBar from './nav-bar'; // Import the NavBar component 
+import HeroSection from './hero-section'; // Import the HeroSection component 
+import WorkSamplesIndex from './work-samples-index'; // Import the WorkSamplesIndex component
 
 export default function HomePage() {
   return (
@@ -15,6 +12,7 @@ export default function HomePage() {
       <NavBar />
       <HeroSection />
       <WorkSamplesIndex />
+      
     </div>
   );
 }

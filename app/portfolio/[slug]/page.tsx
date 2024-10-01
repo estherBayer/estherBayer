@@ -93,7 +93,7 @@ export default async function PortfolioPage({ params }: { params: { slug: string
           )}
 
           {/* Render description if available */}
-          <div className="prose max-w-none w-full text-gray-700 text-lg lg:text-xl leading-loose mb-16">
+          <div className="prose max-w-none w-full text-licorice text-lg lg:text-xl leading-loose mb-16">
             {portfolioPiece?.description?.json &&
               renderRichText(portfolioPiece.description.json, portfolioPiece.description.links)}
           </div>
@@ -118,7 +118,7 @@ export default async function PortfolioPage({ params }: { params: { slug: string
                   </div>
                 )}
                 {description && (
-                  <div className="prose max-w-none w-full text-gray-700 text-lg lg:text-xl leading-loose">
+                  <div className="prose max-w-none w-full text-licorice text-lg lg:text-xl leading-loose">
                     {renderRichText(description, description.links)}
                   </div>
                 )}

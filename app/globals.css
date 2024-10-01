@@ -27,7 +27,6 @@ body {
   0% {
     opacity: 0;
     transform: translateX(-100%);
-    will-change: transform, opacity;
   }
   100% {
     opacity: 1;
@@ -38,7 +37,6 @@ body {
 @keyframes gradientText {
   0% {
     background-position: 0% 50%;
-    will-change: background-position;
   }
   50% {
     background-position: 100% 50%;
@@ -81,7 +79,6 @@ body {
 }
 
 /* Button animation: starts with gradient and transitions to darkThistlePurple on hover */
-/* Gradient Button Animation */
 .gradient-button-animate {
   background: linear-gradient(
     90deg,
@@ -101,8 +98,6 @@ body {
   border: 4px solid transparent;
   animation: gradientButton 4s ease infinite;
   transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out, border-color 0.5s ease-in-out, transform 0.3s ease;
-  position: relative;
-  will-change: background-position; /* Optimization */
 }
 
 /* Gradient Animation for the Button */
@@ -120,7 +115,65 @@ body {
 
 /* On hover, apply the border color and scale effect */
 .button-animate:hover {
-  border-color: transparent; /* Remove visible border */
-  transform: scale(1.05); /* Enlarge the button */
-  box-shadow: 0 0 0 4px #ffffff; /* External border created by box-shadow */
+  border-color: transparent;
+  transform: scale(1.05);
+  box-shadow: 0 0 0 4px #ffffff;
+}
+
+/* Responsive Font Sizes, Margins, and Button Padding */
+
+/* Mobile-specific changes */
+@media (max-width: 767px) {
+  .text-animate {
+    font-size: 5xl;
+    margin-bottom: 1.5rem;
+  }
+
+  .gradient-button-animate {
+    font-size: 1.5rem;
+    padding: 12px 24px;
+  }
+
+  .rowTwo h2 {
+    font-size: 2xl;
+  }
+
+  .rowTwo h3 {
+    font-size: 1.25rem;
+  }
+}
+
+/* Tablet-specific changes */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .text-animate {
+    font-size: 6xl; /* Slightly smaller than desktop */
+    margin-bottom: 2rem; /* More space for tablet */
+  }
+
+  .gradient-button-animate {
+    font-size: 2rem; /* Smaller than desktop */
+    padding: 16px 32px; /* Adjusted for tablet */
+  }
+
+  .rowTwo h2 {
+    font-size: 3xl; /* More readable for tablets */
+  }
+
+  .rowTwo h3 {
+    font-size: 1.5rem;
+  }
+
+  .container {
+    padding-left: 2rem; /* Adjust padding for tablet */
+    padding-right: 2rem;
+  }
+
+  /* Adjust the column layout for better readability on tablets */
+  .column-2-3 {
+    width: 100%; /* Ensure full-width columns */
+  }
+
+  .column-1-3 {
+    margin-top: 2rem; /* Add some spacing between rows */
+  }
 }

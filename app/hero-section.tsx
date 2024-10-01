@@ -17,8 +17,8 @@ function HeroSection() {
   }, []);
 
   return (
-    <div className="w-full bg-cover bg-center flex flex-col justify-start items-start pt-10 md:pt-20 h-screen bg-hero-background">
-      <div className="container w-full px-5 md:px-10 mx-auto">
+    <div className="w-full bg-cover bg-center flex flex-col justify-start items-start pt-10 md:pt-20 lg:pt-24 h-screen bg-hero-background">
+      <div className="container w-full px-5 md:px-10 lg:px-16 mx-auto">
         {/* First Row */}
         <div className="rowOne flex flex-col md:flex-row justify-between items-center md:items-start space-y-0">
           <div className="column column-2-3 md:w-2/3">
@@ -38,7 +38,7 @@ function HeroSection() {
           <div className="column column-1-3 w-full md:w-1/3 flex justify-start md:justify-end">
             <Link href="#portfolio-section" className="scroll-link">
               <button
-                className="work-samples-btn button-animate px-8 py-5 gradient-button-animate text-4xl font-bold rounded-md transition duration-600"
+                className="work-samples-btn button-animate px-6 py-3 md:px-8 md:py-5 lg:px-10 lg:py-6 gradient-button-animate text-4xl font-bold rounded-md transition duration-600"
                 aria-label="View work samples"
               >
                 WORK SAMPLES

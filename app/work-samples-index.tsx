@@ -29,41 +29,41 @@ export default function WorkSamplesIndex() {
   }, {});
 
   return (
-    <div id="portfolio-section" className="md:mt-20 lg:mt-20">
+    <div id="portfolio-section" className="mt-10">
       {/* Full-Width Background for the Title */}
       <div className="w-full bg-gradient-to-r from-white to-darkThistlePurple py-5">
         <div className="container mx-auto">
-          <h2 className="text-2xl md:text-4xl font-bold text-right text-white p-5">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-right text-white p-5">
             WORK SAMPLES
           </h2>
         </div>
       </div>
 
       <div className="container mx-auto py-10 px-5">
-  {Object.keys(projects).map((project, projectIndex) => (
-    <div key={projectIndex} className="mb-12 container mx-auto">
-      <h3 className="text-2xl md:text-4xl mb-12 flex flex-col md:flex-row items-start md:items-center">
-        {/* Project Title */}
-        <strong>{project}</strong>
+        {Object.keys(projects).map((project, projectIndex) => (
+          <div key={projectIndex} className="mb-12 container mx-auto">
+            <h3 className="text-2xl md:text-3xl lg:text-4xl mb-8 flex flex-col md:flex-row items-start md:items-center">
+              {/* Project Title */}
+              <strong>{project}</strong>
 
-        {/* Display the Live Website Link beside the project title */}
-        {projects[project].some((sample: { liveWebsiteLink: any }) => sample.liveWebsiteLink) && (
-          <a
-            href={projects[project][0].liveWebsiteLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="md:ml-4 mt-2 md:mt-0 text-2xl md:text-4xl text-darkThistlePurple hover:text-menuBlue"
-          >
-            <em>- explore the live project </em><u>here</u>
-          </a>
-        )}
-      </h3>
+              {/* Display the Live Website Link beside the project title */}
+              {projects[project].some((sample: { liveWebsiteLink: any }) => sample.liveWebsiteLink) && (
+                <a
+                  href={projects[project][0].liveWebsiteLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="md:ml-4 mt-2 md:mt-0 text-2xl md:text-3xl lg:text-4xl text-darkThistlePurple hover:text-menuBlue"
+                >
+                  <em>- explore the live project </em><u>here</u>
+                </a>
+              )}
+            </h3>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects[project].map((sample: any, index: number) => (
                 <div key={index} className="relative group">
                   <div className="text-right mb-2">
-                    <h3 className="text-sm font-bold">
+                    <h3 className="text-sm md:text-base lg:text-lg font-bold">
                       {sample.title || `Sample Title ${index + 1}`}
                     </h3>
                   </div>
@@ -76,6 +76,7 @@ export default function WorkSamplesIndex() {
                           src={sample.image.url}
                           alt={sample.image.title || `Image ${index + 1}`}
                           className="w-full h-auto transition-all duration-300"
+                          loading="lazy"
                         />
                       )}
 

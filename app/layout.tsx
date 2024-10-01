@@ -24,7 +24,7 @@ function Footer() {
             </p>
             <p className="font-bold">
               Get in touch: 
-              <a href="mailto:hello@estherbayer.com" className="hover:underline hover:text-thistle ml-1">
+              <a href="mailto:hello@estherbayer.com" className="hover:underline hover:text-licorice ml-1">
                 hello@estherbayer.com
               </a>
             </p>

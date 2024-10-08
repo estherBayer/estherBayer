@@ -1,132 +1,95 @@
-import Link from "next/link"; 
-import { draftMode } from "next/headers";
-import { getPortfolioPieces, getPortfolioPieceBySlug } from "@/lib/api";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { BLOCKS, INLINES } from "@contentful/rich-text-types";
-import NavBar from "../../nav-bar"; // Import the navbar component
+import { GetStaticProps, GetStaticPaths } from 'next';
+import { getPortfolioPageBySlug, PortfolioPageFields, getAllPortfolioPages } from "@/lib/api";
+import NavBar from "../../nav-bar";
+import TextImageStack from "../../text-image-stack";
+import CoverImage from "../../cover-image"; // Example of additional content
 
-// Fetch portfolio slugs for dynamic paths
-export async function generateStaticParams() {
-  const allPortfolioPieces = await getPortfolioPieces();
-  return allPortfolioPieces.map((piece) => ({
-    slug: piece.slug,
-  }));
+// Interface for Props
+interface PortfolioPageProps {
+  pageData: PortfolioPageFields;
 }
 
-// Helper function to render rich text fields with embedded assets and links
-const renderRichText = (richText: any, links: any) => {
-  if (!richText) return null;
+// getStaticProps
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const { slug } = params as { slug: string };
 
-  // Extract assets from the links property
-  const assetMap = new Map();
-  links?.assets?.block?.forEach((asset: any) => {
-    assetMap.set(asset.sys.id, asset);
-  });
+  const pageData = await getPortfolioPageBySlug(slug);
 
-  return documentToReactComponents(richText, {
-    renderNode: {
-      [BLOCKS.EMBEDDED_ASSET]: (node: any) => {
-        const assetId = node?.data?.target?.sys?.id;
-        const asset = assetMap.get(assetId);
-        const imageUrl = asset?.url;
-        const title = asset?.description;
-
-        if (imageUrl) {
-          return (
-            <div className="p-3 lg:p-5 mb-8 sm:mx-0 md:mb-16">
-              <img
-                src={imageUrl.startsWith("http") ? imageUrl : `https:${imageUrl}`}
-                alt={title || "Embedded Asset"}
-                className="w-full h-auto rounded-lg shadow-md"
-              />
-            </div>
-          );
-        }
-        return null;
-      },
-      [INLINES.HYPERLINK]: (node: any) => {
-        const { uri } = node.data;
-        return (
-          <a href={uri} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-            {node.content[0].value}
-          </a>
-        );
-      },
-    },
-  });
-};
-
-export default async function PortfolioPage({ params }: { params: { slug: string } }) {
-  const { isEnabled } = draftMode() || { isEnabled: false };
-
-  // Fetch the portfolio piece based on the slug
-  const portfolioPiece = await getPortfolioPieceBySlug(params.slug);
-
-  // Add a fallback in case the data doesn't load
-  if (!portfolioPiece) {
-    return <div>Portfolio piece not found</div>;
+  if (!pageData) {
+    return {
+      notFound: true,
+    };
   }
 
+  return {
+    props: { pageData },
+  };
+};
+
+// getStaticPaths
+export const getStaticPaths: GetStaticPaths = async () => {
+  const allPages = await getAllPortfolioPages();
+
+  const paths = allPages.map((page) => ({
+    params: { slug: page.slug },
+  }));
+
+  return {
+    paths,
+    fallback: "blocking", // Blocking to allow dynamic fallback rendering
+  };
+};
+
+// PortfolioPage Component
+export default function PortfolioPage({ pageData }: PortfolioPageProps) {
   return (
     <div>
-      {/* Render NavBar here, outside the container */}
       <NavBar />
-      
-      {/* The rest of the portfolio page content */}
-      <div className="container mx-auto px-5">
-      <h2 className="mb-20 mt-8 text-2xl font-bold leading-tight tracking-tight md:text-4xl md:tracking-tighter"></h2>
-      
-        <article>
-          <h1 className="mb-12 text-left text-5xl text-darkThistlePurple font-bold leading-tight tracking-tighter md:text-left md:text-6xl md:leading-none lg:text-7xl">
-            {portfolioPiece?.title || "Untitled Project"}
-          </h1>
 
-          {/* Render cover image if available */}
-          {portfolioPiece?.coverImage?.url && (
-            <div className="mb-8 sm:mx-0 md:mb-16">
-              <img
-                src={portfolioPiece.coverImage.url.startsWith("http") ? portfolioPiece.coverImage.url : `https:${portfolioPiece.coverImage.url}`}
-                alt={portfolioPiece.coverImage.title || "Cover Image"}
-                className="w-full h-auto rounded-lg shadow-lg"
-              />
-            </div>
-          )}
+      {/* Render Page Title */}
+      <h1>{pageData.title}</h1>
 
-          {/* Render description if available */}
-          <div className="prose max-w-none w-full text-licorice text-lg lg:text-xl leading-loose mb-16">
-            {portfolioPiece?.description?.json &&
-              renderRichText(portfolioPiece.description.json, portfolioPiece.description.links)}
-          </div>
+      {/* Render Components Dynamically */}
+      {pageData.componentsCollection?.items?.length ? (
+        pageData.componentsCollection.items.map((component, index) => {
+          switch (component.__typename) {
+            case 'TextImageStack':
+              return (
+                <TextImageStack
+                  key={index}
+                  fields={{
+                    title: component.title ?? "Untitled",
+                    text: component.text ?? "",
+                    image: component.image
+                      ? {
+                          fields: {
+                            file: {
+                              url: component.image?.url ?? "",
+                            },
+                            title: component.image?.title ?? "",
+                          },
+                        }
+                      : undefined,
+                  }}
+                />
+              );
+            case 'CoverImage': // Example to handle cover image component
+              return (
+                <CoverImage
+                  key={index}
+                  title={component.title ?? "No Title"}
+                  url={component.coverImage?.url ?? ""}
+                />
+              );
+            // Add more component cases here for different types
+            default:
+              return null;
+          }
+        })
+      ) : (
+        <p>No components found for this page.</p>
+      )}
 
-          {/* Render up to 17 images and descriptions */}
-          {Array.from({ length: 17 }).map((_, index) => {
-            const imageKey = `image${index + 1}`;
-            const descKey = `description${index + 2}`;
-
-            const image = portfolioPiece?.[imageKey];
-            const description = portfolioPiece?.[descKey]?.json;
-
-            return (image?.url || description) ? (
-              <div key={index} className="mb-12">
-                {image?.url && (
-                  <div className="p-3 lg:p-5 mb-8 sm:mx-0 md:mb-16">
-                    <img
-                      src={image.url.startsWith("http") ? image.url : `https:${image.url}`}
-                      alt={image.title || `Image ${index + 1}`}
-                      className="w-full h-auto rounded-lg shadow-md"
-                    />
-                  </div>
-                )}
-                {description && (
-                  <div className="prose max-w-none w-full text-licorice text-lg lg:text-xl leading-loose">
-                    {renderRichText(description, description.links)}
-                  </div>
-                )}
-              </div>
-            ) : null;
-          })}
-        </article>
-      </div>
     </div>
   );
 }

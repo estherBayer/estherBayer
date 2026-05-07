@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { Analytics } from '@vercel/analytics/next';
 
 export const metadata = {
   title: `Esther Bayer`,
@@ -49,6 +50,7 @@ export default function RootLayout({
           <main>{children}</main>
           <Footer />
         </section>
+        <Analytics />
       </body>
     </html>
   );

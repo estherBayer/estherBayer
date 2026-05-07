@@ -9,29 +9,20 @@ export default function Home() {
       </header>
 
       <section className="center">
-        <div className="lock">🔒</div>
-        <h1>what’s the password?</h1>
-        <p className="dashes">— — — — — — —</p>
+        
+        <h1>My portfolio is temporarily offline while I’m making updates.</h1>
         <p className="note">
-          My portfolio is temporarily offline while I’m making updates.
+          To request selected work samples or get in touch, please email me.
         </p>
-      </section>
-
-      <footer className="footer">
-        <div className="dots">
-          <span className="pink" />
-          <span className="purple" />
-          <span className="blue" />
-          <span className="cyan" />
-          <span className="cream" />
-        </div>
-
         <a
           className="hello"
           href="mailto:hello@estherbayer.com?subject=Portfolio%20Request"
         >
           ✉ say hello
         </a>
+      </section>
+
+      <footer className="footer">
       </footer>
 
       <style jsx global>{`
